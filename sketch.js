@@ -1,3 +1,24 @@
+// Array holding same data type
+var arr1 = [1,2,3,4,5];
+console.log(arr1);
+
+//Array holding diff data type
+var arr2 = ["name",1,true];
+console.log(arr2);
+
+//Array storing a list of arrays
+var arr3=[[1,2],[2,3],[3,4]];
+console.log(arr3);
+
+//Access the first element of an array
+console.log(arr1[0]);
+//Acces the second element of the first element of an array
+console.log(arr3[0][1]);
+
+arr3.push("my name");
+console.log(arr3);
+arr1.pop();
+console.log(arr1);
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -8,7 +29,7 @@ var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
 
-
+var gameState="onSling";
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
 }
@@ -69,16 +90,19 @@ function draw(){
 }
 
 function mouseDragged(){
+  if(gameState!=="launched"){
     Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+  }
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState="launched";
 }
 
 function keyPressed(){
     if(keyCode === 32){
-        slingshot.attach(bird.body);
+  //  slingshot.attach(bird.body);
     }
 }
